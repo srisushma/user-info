@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { UserService } from '../shared/user.service';
 import { Router } from '@angular/router';
@@ -13,11 +13,11 @@ import { AddUser } from './store/add-user.actions'
   styleUrls: ['./user.component.scss']
 })
 export class UserComponent implements OnInit {
-
   userModel;
   userForm: FormGroup;
   isUserAdded: boolean= false;
   isError:boolean = false;
+  @ViewChild("userName") userName: ElementRef;
   constructor(private fb: FormBuilder, private userService: UserService, 
     private router: Router, private store: Store<{addUser: {users: User[]}}>) { }
 
@@ -36,8 +36,13 @@ export class UserComponent implements OnInit {
     const newUser = new User(value.userName, value.firstName, value.lastName, value.phoneNumber, value.interests);
     this.store.dispatch(new AddUser(newUser));
     this.isUserAdded = true;
+    setTimeout(function() { 
+      this.isUserAdded = false; 
+      this.userForm.reset();
+      this.userName.nativeElement.focus();
+    }.bind(this),2000)
     this.isError = false;
-    console.log("user added");
+    
     // ** To access through API **
     // this.userService.addUser(newUser).subscribe(
     //   (response) => { console.log(response);

@@ -7,7 +7,7 @@
               <label for="userName">User name</label>
               <input
                 type="text" id="userName" formControlName="userName"
-                class="form-control" >
+                class="form-control" #userName>
                 <div *ngIf="userForm.controls['userName'].errors && 
                 (userForm.controls['userName'].dirty || userForm.controls['userName'].touched)"
     class="mt-1 alert alert-danger">User name is mandatory. </div>
@@ -68,9 +68,6 @@
   <div class="row justify-content-center mt-2" *ngIf="isUserAdded">
       <div class="alert alert-success" role="alert">
           <i class="fa fa-check-circle-o text-success"></i> User <strong>'{{userForm.controls['userName'].value}}'</strong> has been added!
-      </div>
-      <div class="alert alert-danger" role="alert" *ngIf="isError">
-        Error: In adding user!
       </div>
   </div>
 </div>
