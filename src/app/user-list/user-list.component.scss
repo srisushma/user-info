@@ -1,0 +1,16 @@
+.arrow:hover {
+    cursor: pointer;
+}
+.search-input {
+    border: none;
+    border-bottom: 1px solid gray;
+    color: gray;
+    font-style: oblique;
+    border-radius: 0px;
+}
+.search-input:focus{
+    box-shadow: 0 0 0;
+}
+.fa-trash {
+    cursor: pointer;
+}

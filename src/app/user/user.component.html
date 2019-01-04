@@ -1,0 +1,76 @@
+<div class="container mt-4">
+  <div class="row">
+      <form [formGroup]="userForm" class="w-100" (ngSubmit)="onAddUser()">
+        <div class="row justify-content-center">
+          <div class="col-xs-12 col-md-3">
+            <div class="form-group">
+              <label for="userName">User name</label>
+              <input
+                type="text" id="userName" formControlName="userName"
+                class="form-control" >
+                <div *ngIf="userForm.controls['userName'].errors && 
+                (userForm.controls['userName'].dirty || userForm.controls['userName'].touched)"
+    class="mt-1 alert alert-danger">User name is mandatory. </div>
+            </div>
+          </div>
+          <div class="col-xs-12 col-md-3">
+              <div class="form-group">
+                <label for="firstName">First name</label>
+                <input
+                  type="text" id="firstName" formControlName="firstName"
+                  class="form-control">
+                  <div *ngIf="userForm.controls['firstName'].errors && 
+                  (userForm.controls['firstName'].dirty || userForm.controls['firstName'].touched)"
+    class="mt-1 alert alert-danger">First name is mandatory & must be alpha-numeric. </div>
+              </div>
+            </div>
+        </div>
+        <div class="row justify-content-center">
+          <div class="col-xs-12 col-md-3">
+            <div class="form-group">
+              <label for="lastName">Last name</label>
+              <input name="phoneNumber" id="lastName" formControlName="lastName" class="form-control">                  
+              <div *ngIf="userForm.controls['lastName'].errors && 
+              (userForm.controls['lastName'].dirty || userForm.controls['lastName'].touched)"
+    class="mt-1 alert alert-danger">Last name is mandatory & must be alpha-numeric.</div>
+            </div>
+          </div>
+          <div class="col-xs-12 col-md-3">
+              <div class="form-group">
+                <label for="phoneNumber">Phone number<span class="glyphicon glyphicon-asterisk"></span></label>
+                <input name="phoneNumber" id="phoneNumber" formControlName="phoneNumber" 
+                class="form-control" maxlength="10">
+                <div *ngIf="userForm.controls['phoneNumber'].errors && 
+                (userForm.controls['phoneNumber'].dirty || userForm.controls['phoneNumber'].touched)"
+    class="mt-1 alert alert-danger">Phone number is mandatory & must be numeric. </div>
+              </div>
+            </div>
+        </div>
+        <div class="row justify-content-center">
+          <div class="col-xs-12 col-md-3">
+            <div class="form-group">
+              <label for="interests">Interests</label>
+              <textarea name="interests" id="interests" formControlName="interests" class="form-control"></textarea>
+              <div *ngIf="userForm.controls['interests'].errors && 
+              (userForm.controls['interests'].dirty || userForm.controls['interests'].touched)"
+  class="mt-1 alert alert-danger">Interests are mandatory. </div>
+            </div>
+          </div>
+        </div>
+        <div class="row justify-content-center">
+          <div class="mt-3 mb-3">
+            <button type="submit" class="btn btn-secondary" [class.disabled]="!userForm.valid" [disabled]="!userForm.valid"
+              >Add User</button>
+          </div>
+        </div>
+      </form>
+  </div>
+  <div class="row justify-content-center mt-2" *ngIf="isUserAdded">
+      <div class="alert alert-success" role="alert">
+          <i class="fa fa-check-circle-o text-success"></i> User <strong>'{{userForm.controls['userName'].value}}'</strong> has been added!
+      </div>
+      <div class="alert alert-danger" role="alert" *ngIf="isError">
+        Error: In adding user!
+      </div>
+  </div>
+</div>
